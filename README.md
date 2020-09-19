@@ -1,8 +1,22 @@
-MQTT listener dan data flow manager.
+# Smart Body Temperature Scanner
+
+Repositori aplikasi server-side untuk proyek prototip Smart Body Temperature Scanner. 
 
 Reference: https://iotbytes.wordpress.com/store-mqtt-data-from-sensors-into-sql-database/ && https://github.com/pradeesi/Store_MQTT_Data_in_Database
 
-Files:
+
+## Main Development Files
+Aplikasi server side bekerja sebagai listener dan virtual MQTT broker. Terdapat tiga file Python dan satu file service dalam repositori ini:
+
+1. GeneralListener.py: Aplikasi utama, dijalankan sebagai daemon pada server. Berfungsi sebagai listener MQTT utama. Semua koneksi MQTT akan diterima oleh aplikasi ini, untuk kemudian diolah sesuai tipenya. Tipe MQTT message dikelola berdasarkan topic dari message. Secara konsepnya, aplikasi ini berlaku sebagai proxy MQTT broker.
+
+2. CheckConnHandler.py: Berisi kumpulan fungsi yang memiliki peran mengirimkan informasi koneksi dan waktu serta tanggal kepada sensor
+
+3. Gateway.py: Berisi kumpulan fungsi yang memiliki peran pengolahan data suhu tubuh yang dikirimkan sensor. 
+
+4. general-listener-service.service: Pengaturan untuk menjalankan aplikasi GeneralListener sebagai daemon service
+
+## Past-Development Files
 
 1. DBInitializer.py: create database, useful for future database reset needs
 
@@ -11,10 +25,10 @@ Files:
 3. PublisherMQTT.py: mqtt client, publishes dummy data for testing purpose
 
 4. SensorDataToDB.py: mqtt client, subscribes to certain topics then store data to database
-
+<!-- 
 Program listener di execute sebagai client listener, kemudian akan kirim data yang diterima ke function di file SensorDataToDB
 
-=====================================================================================================================
+
 
 Run listener as background process (https://janakiev.com/blog/python-background/):
 
@@ -38,4 +52,4 @@ nohup /path/to/test.py &
 
 5. It is also possible to kill the process by using pkill, but make sure you check if there is not a different script running with the same name:
 
-   pkill -f test.py
+   pkill -f test.py -->
